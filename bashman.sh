@@ -138,8 +138,8 @@ fi
 
 PLAYER="${PLAYER^^}" 
 
-if [ $2 -gt 0 ] ; then MAZE_ROWS=$2 ; fi
-if [ $3 -gt 0 ] ; then MAZE_COLS=$3 ; fi
+if [ ! -z $2 ] ; then MAZE_ROWS=$2 ; fi
+if [ ! -z $3 ] ; then MAZE_COLS=$3 ; fi
 
 
 #read -p "Player name (<ENTER> for default: GUEST): " PLAYER CATCH_REST
