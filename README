@@ -3,7 +3,7 @@ Bashman, a pac-man-like bash game
 This is a simple random maze game where there's a man, a monster
 and an exit.
 The man will try to collect as many points in the maze as possible 
-before reaching the exit. 
+before reaching an exit. 
 The monster will try to approach and beat the man. If the monster 
 catches the man, the man "loses" health. When this happens or when 
 the exit is reached the game restarts in a new random maze.

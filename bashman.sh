@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.0.0"
+VERSION="1.0.1"
 #
 # Bashman
 # Author:  lramosde 
@@ -101,7 +101,9 @@ echo "  w or k  : moves up "
 echo "  s or j  : moves down "
 echo "  a or j  : moves left "
 echo "  d or l  : moves right "
-echo "  b or m  : detonates a bomb (destroys nearest walls) "
+echo "  x or m  : detonates a bomb (destroys nearest walls) "
+echo 
+echo "  q       : quit (writing score)"
 echo 
 echo "Notes:" 
 echo "  -A new maze is generated when the monster reach you or you reach the exit."
@@ -163,7 +165,7 @@ touch "$HOME/.$HIGH_SCORES_FILE"
 function game_over()
 {
  flash_maze 
- show_maze "Beaten!"
+ show_maze $1 
  sleep 3 
  echo  "${PLAYER} ${SCORE}" >> "${HOME}/.${HIGH_SCORES_FILE}"
  show_high_scores
@@ -590,7 +592,7 @@ function monster_move()
                (( HEALTH -= HEALTH_HEAL_INC ))
                if [ $HEALTH -eq 0 ] 
                then
-                 game_over
+                 game_over "Dead! :("
                fi 
 
                if [ $HEALTH -eq $HEALTH_HEAL_INC ]
@@ -670,7 +672,7 @@ function bashman_move()
        (( NEW_Y-- )) 
        show_maze "up"
        ;;
-   b|m)
+   x|m)
        if [ $BOMBS -ge 1 ]
        then
          bomb $MAN_X $MAN_Y 
@@ -684,6 +686,9 @@ function bashman_move()
          fi  
        fi
        return 0
+       ;;
+     q)
+       game_over "Quitting..." 
        ;;
      *)
        return 1
@@ -726,7 +731,7 @@ function bashman_move()
      (( HEALTH -= HEALTH_HEAL_INC  ))
      if [ $HEALTH -eq 0 ]
      then
-       game_over
+       game_over "Dead! :("
      fi
 
      flash_maze
